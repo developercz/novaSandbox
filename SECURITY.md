@@ -1,28 +1,28 @@
-# 🔒 BEZPEČNOSTNÍ PRŮVODCE - NovaSandbox
+# 🔒 SECURITY GUIDE - NovaSandbox
 
-## Přehled hrozeb a mitigace
+## Threat Overview and Mitigation
 
-### 1. **Host Breakout** (Únik z VM)
-Útočník se snaží uniknout z VM a přistoupit k hostitelskému systému.
+### 1. **Host Breakout** (VM Escape)
+Attacker attempts to escape from the VM and access the host system.
 
-**Implementovaná ochrana:**
-- ✅ **Kernel namespacing** - Oddělit network, PID, IPC namespace
-- ✅ **TAP interface izolace** - Network je oddělena od hostitele
-- ✅ **Readonly rootfs** (PARANOID) - Zákaz zápisu do kritických souborů
-- ✅ **Seccomp filtering** - Blokování nebezpečných syscalls
-  - `ptrace`, `clone`, `fork`, `vfork` - Debug/escape prevence
-  - `mount`, `umount2` - Zákaz mountování dalších FS
-  - `module_load` - Zákaz kernel modulů
-- ✅ **File access control** - Blokování cest `/../`, `/host`, atd.
+**Implemented Protection:**
+- ✅ **Kernel namespacing** - Separate network, PID, IPC namespaces
+- ✅ **TAP interface isolation** - Network separated from host
+- ✅ **Readonly rootfs** (PARANOID) - Prevent writes to critical files
+- ✅ **Seccomp filtering** - Block dangerous syscalls
+  - `ptrace`, `clone`, `fork`, `vfork` - Debug/escape prevention
+  - `mount`, `umount2` - Prevent mounting additional filesystems
+  - `module_load` - Prevent kernel modules
+- ✅ **File access control** - Block paths `/../`, `/host`, etc.
 
-**Použití (maximální ochrana):**
+**Usage (maximum protection):**
 ```python
 from novasandbox.core import SandboxConfig, SecurityLevel
 
 config = SandboxConfig(
     security_level=SecurityLevel.PARANOID,
-    # Výsledek:
-    # - Maximální seccomp filtrování
+    # Result:
+    # - Maximum seccomp filtering
     # - 512MB RAM limit
     # - 1 vCPU limit
     # - Readonly rootfs
@@ -32,48 +32,48 @@ config = SandboxConfig(
 ---
 
 ### 2. **Denial of Service (DOS)** 
-Útočník vyčerpá resursy a zhroutí sandbox/host.
+Attacker exhausts resources and crashes sandbox/host.
 
-**Implementovaná ochrana:**
+**Implemented Protection:**
 - ✅ **Memory limits** - cgroups memory.limit_in_bytes
-  - BASIC: Bez limitu
+  - BASIC: No limit
   - STANDARD: 2048MB
   - STRICT: 1024MB
   - PARANOID: 512MB
 
-- ✅ **CPU limits** - cpuset.cpus omezení
-  - BASIC: Bez limitu
+- ✅ **CPU limits** - cpuset.cpus restriction
+  - BASIC: No limit
   - STANDARD: 4 vCPU max
   - STRICT: 2 vCPU max
   - PARANOID: 1 vCPU max
 
 - ✅ **Process limits** - pids.max
-  - STANDARD: 1000 procesů max
-  - STRICT: Nižší limit
+  - STANDARD: 1000 processes max
+  - STRICT: Lower limit
   
-- ✅ **Rate limiting** - Síťové requesty
+- ✅ **Rate limiting** - Network requests
   ```python
-  # Automaticky limituje 1000 requestů/sec per sandbox
-  # Lze konfigurovat: rate_limit_mbps
+  # Automatically limits 1000 requests/sec per sandbox
+  # Configurable: rate_limit_mbps
   ```
 
 - ✅ **File descriptor limits**
-  - max_open_files: 1024 (nastavitelné)
+  - max_open_files: 1024 (configurable)
 
-**Testování DOS odolnosti:**
+**Testing DOS resistance:**
 ```bash
-# Stress test v sandboxu
+# Stress test in sandbox
 stress-ng --vm 1 --vm-bytes 100M --timeout 10s
 
-# Host zůstane stabilní díky cgroups limitům
+# Host remains stable thanks to cgroups limits
 ```
 
 ---
 
 ### 3. **Network Exploitation**
-Útočník získá přístup k síti/porům mimo sandbox.
+Attacker gains access to network/ports outside sandbox.
 
-**Implementovaná ochrana:**
+**Implemented Protection:**
 - ✅ **IP whitelist/blacklist**
   ```python
   policy = SecurityPolicy(
@@ -84,7 +84,7 @@ stress-ng --vm 1 --vm-bytes 100M --timeout 10s
 - ✅ **Port whitelist**
   ```python
   policy = SecurityPolicy(
-      allowed_ports={80, 443, 8080}  # Pouze tyto porty
+      allowed_ports={80, 443, 8080}  # Only these ports
   )
   ```
 
@@ -96,86 +96,86 @@ stress-ng --vm 1 --vm-bytes 100M --timeout 10s
   )
   ```
 
-- ✅ **Raw socket blokace**
+- ✅ **Raw socket blocking**
   ```python
   policy = SecurityPolicy(
-      allow_raw_sockets=False  # Zákaz raw socketu
+      allow_raw_sockets=False  # Disable raw sockets
   )
   ```
 
-- ✅ **Network namespace izolace**
-  - Sandbox má vlastní network namespace
-  - Přístup jen přes NAT překlad
+- ✅ **Network namespace isolation**
+  - Sandbox has its own network namespace
+  - Access only through NAT translation
 
 ---
 
 ### 4. **Privilege Escalation**
-Útočník se pokusí získat root přístup v sandboxu nebo na hostiteli.
+Attacker attempts to gain root access in sandbox or on host.
 
-**Implementovaná ochrana:**
-- ✅ **Setuid bit blokace**
+**Implemented Protection:**
+- ✅ **Setuid bit blocking**
   ```python
   policy = SecurityPolicy(
-      allow_setuid=False  # Zákaz setuid binaries
+      allow_setuid=False  # Disable setuid binaries
   )
   ```
 
-- ✅ **Capabilities dropping** - Linux capabilities omezeny
+- ✅ **Capabilities dropping** - Linux capabilities restricted
   - CAP_NET_ADMIN
   - CAP_SYS_ADMIN
   - CAP_SYS_PTRACE
 
-- ✅ **Syscall filtering** - Blokování escalation syscalls
+- ✅ **Syscall filtering** - Blocking escalation syscalls
 
 ---
 
 ### 5. **Information Disclosure**
-Útočník se snaží číst citlivé informace.
+Attacker attempts to read sensitive information.
 
-**Implementovaná ochrana:**
+**Implemented Protection:**
 - ✅ **Audit logging**
   ```python
   policy = SecurityPolicy(
-      log_syscalls=True,    # Log všech syscalls
-      log_network=True      # Log síťového provozu
+      log_syscalls=True,    # Log all syscalls
+      log_network=True      # Log network traffic
   )
   
-  # Potom:
+  # Then:
   summary = security_manager.get_violations_summary()
   # Contains 'syscall_log', 'violations'
   ```
 
-- ✅ **Proc filesystem restricce** - /proc/sys hidden
-- ✅ **Device whitelist** - Jen `/dev/null`, `/dev/zero`, `/dev/urandom`
+- ✅ **Proc filesystem restrictions** - /proc/sys hidden
+- ✅ **Device whitelist** - Only `/dev/null`, `/dev/zero`, `/dev/urandom`
 
 ---
 
 ### 6. **Supply Chain / Code Injection**
-Útočník podstrčí malicious kód do image nebo šablony.
+Attacker injects malicious code into image or template.
 
-**Implementovaná ochrana:**
-- ✅ **Image signing** (manuální, doporučeno)
+**Implemented Protection:**
+- ✅ **Image signing** (manual, recommended)
   ```bash
-  # Vytvoření SHA256 hashe image
+  # Create SHA256 hash of image
   sha256sum alpine-python.img > alpine-python.img.sha256
   
-  # Ověření:
+  # Verify:
   sha256sum -c alpine-python.img.sha256
   ```
 
 - ✅ **Immutable templates**
   ```python
-  # Templates jsou read-only, nelze měnit za běhu
-  # Verze je v názvu: alpine-python-v1.2.3.json
+  # Templates are read-only, cannot be changed at runtime
+  # Version is in the name: alpine-python-v1.2.3.json
   ```
 
-- ✅ **Signed kernels** (volitelně)
+- ✅ **Signed kernels** (optional)
 
 ---
 
-## Úrovně Bezpečnosti - Detailní Porovnání
+## Security Levels - Detailed Comparison
 
-| Funkce | BASIC | STANDARD | STRICT | PARANOID |
+| Feature | BASIC | STANDARD | STRICT | PARANOID |
 |--------|-------|----------|--------|----------|
 | **Seccomp** | ❌ | ✅ | ✅ | ✅ |
 | **AppArmor** | ❌ | ✅ | ✅ | ✅ |
@@ -194,9 +194,9 @@ stress-ng --vm 1 --vm-bytes 100M --timeout 10s
 
 ---
 
-## Praktické Příklady
+## Practical Examples
 
-### Příklad 1: Bezpečný AI Agent Sandbox
+### Example 1: Secure AI Agent Sandbox
 ```python
 from novasandbox.core import SandboxConfig, SecurityLevel
 from novasandbox.providers import FirecrackerHypervisor

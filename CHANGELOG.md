@@ -1,73 +1,73 @@
 # Changelog
 
-Všechny zásadní změny v tomto projektu jsou dokumentovány v tomto souboru.
+All significant changes to this project are documented in this file.
 
-Formát je založen na [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-a projekt dodržuje [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and the project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [0.1.0] - 2025-01-16
 
 ### Added
-- Inicializace projektu NovaSandbox
-- Abstraktní vrstva `BaseHypervisor` pro jednotné API
-- Implementace Firecracker hypervisoru pro Linux
-  - Ultra-rychlé boot časy (<150ms)
+- NovaSandbox project initialization
+- Abstract `BaseHypervisor` layer for unified API
+- Firecracker hypervisor implementation for Linux
+  - Ultra-fast boot times (<150ms)
   - TAP interface management
-  - API socket komunikace
+  - API socket communication
   - Resource monitoring
-- Implementace Apple VZ hypervisoru pro macOS
-  - Nativní Virtualization.Framework integrace
-  - Pause/Resume podpora
-  - Network NAT konfiguraci
-- `Sandbox` třída pro reprezentaci VM instancí
+- Apple VZ hypervisor implementation for macOS
+  - Native Virtualization.Framework integration
+  - Pause/Resume support
+  - Network NAT configuration
+- `Sandbox` class for VM instance representation
   - Lifecycle management (start, pause, resume, stop)
-  - Statistiky a monitoring
+  - Statistics and monitoring
   - Metadata storage
-- `TemplateManager` pro správu šablon
-  - JSON-based konfigurace
-  - Validace šablon
-  - Dynamické loadování
-- `SandboxConfig` dataclass pro konfiguraci
-  - Paměť, CPU, síť
-  - Extra disky
+- `TemplateManager` for template management
+  - JSON-based configuration
+  - Template validation
+  - Dynamic loading
+- `SandboxConfig` dataclass for configuration
+  - Memory, CPU, network
+  - Extra disks
   - Metadata labels
-- Příklady:
-  - `basic_usage.py` - základní operace
-  - `api_server.py` - REST API server s FastAPI
-  - `firecracker_setup.py` - instrukce pro setup
-- Testy:
-  - Unit testy v `test_sandbox.py`
-  - Benchmark testy v `benchmark.py`
-  - Coverage repor generování
-- Dokumentace:
-  - Komplexní README.md
+- Examples:
+  - `basic_usage.py` - basic operations
+  - `api_server.py` - REST API server with FastAPI
+  - `firecracker_setup.py` - setup instructions
+- Tests:
+  - Unit tests in `test_sandbox.py`
+  - Benchmark tests in `benchmark.py`
+  - Coverage report generation
+- Documentation:
+  - Comprehensive README.md
   - API reference
   - Troubleshooting guide
   - Contributing guidelines
 - Development tools:
-  - Makefile pro common tasks
-  - pyproject.toml s black/isort konfigurací
-  - pytest konfigurace s async support
-  - .gitignore pro Python projekty
+  - Makefile for common tasks
+  - pyproject.toml with black/isort configuration
+  - pytest configuration with async support
+  - .gitignore for Python projects
 
 ### Technical Details
-- Asynchronní API s asyncio
-- Type hints všech public API
-- Logging s Python logging module
+- Asynchronous API with asyncio
+- Type hints for all public APIs
+- Logging with Python logging module
 - Cross-platform support (Linux/macOS)
 
-## Plánované features
+## Planned Features
 
 ### [0.2.0]
 - [ ] REST API server (alpha)
 - [ ] Persistent storage management
 - [ ] Custom kernel support
-- [ ] Hook systém (pre/post lifecycle events)
+- [ ] Hook system (pre/post lifecycle events)
 - [ ] Metrics export (Prometheus)
 
 ### [0.3.0]
 - [ ] Windows Hyper-V support
-- [ ] gVisor implementace
+- [ ] gVisor implementation
 - [ ] Docker image import
 - [ ] Volume management
 - [ ] Multi-VM orchestration
@@ -79,23 +79,23 @@ a projekt dodržuje [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - [ ] Extended documentation
 - [ ] CLI tool
 
-## Známé problémy
+## Known Issues
 
-- Apple VZ implementace vyžaduje macOS 11+ s Apple Silicon
-- Firecracker vyžaduje KVM a sudo oprávnění
-- Network isolation vyžaduje Linux network namespace support
+- Apple VZ implementation requires macOS 11+ with Apple Silicon
+- Firecracker requires KVM and sudo privileges
+- Network isolation requires Linux network namespace support
 
-## Bezpečnost
+## Security
 
-Pro informace o bezpečnostních zranitelnostech prosím kontaktujte maintainers
-přímo místo veřejného reportu.
+For information about security vulnerabilities, please contact maintainers
+directly instead of public reporting.
 
 ---
 
-Změny jsou organizovány pod verzemi se standardními sekce:
-- **Added** - nové funkcionality
-- **Changed** - změny v existující funkcionalitě
-- **Deprecated** - budoucí odebrání
-- **Removed** - odebrané funkcionality
-- **Fixed** - opravy bugů
-- **Security** - bezpečnostní aktualizace
+Changes are organized under versions with standard sections:
+- **Added** - new features
+- **Changed** - changes in existing functionality
+- **Deprecated** - future removal
+- **Removed** - removed features
+- **Fixed** - bug fixes
+- **Security** - security updates

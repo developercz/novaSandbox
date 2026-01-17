@@ -1,54 +1,54 @@
-# NovaSandbox: Ultra-rychlý microVM systém pro AI agenty
+# NovaSandbox: Ultra-fast microVM system for AI agents
 
-Minimalistický, vysoce optimalizovaný systém pro vytváření a správu ultra-rychlých microVM pro AI agenty. Podpora Firecracker (Linux) a Apple Virtualization Framework (macOS) s cílem dosáhnout startu pod 150ms.
+Minimalistic, highly optimized system for creating and managing ultra-fast microVMs for AI agents. Support for Firecracker (Linux) and Apple Virtualization Framework (macOS) with the goal of achieving startup times under 150ms.
 
-## 🚀 Vlastnosti
+## 🚀 Features
 
-- **Ultra-rychlý start**: Boot časy pod 150ms (Firecracker)
+- **Ultra-fast startup**: Boot times under 150ms (Firecracker)
 - **Multi-platform**: Linux (Firecracker) + macOS (Apple VZ)
-- **Minimalistický**: Zbytnečné feature nejsou - zaměření na výkon
-- **Asyncio**: Plně asynchronní API pro souběžné správy více VM
-- **Izolace**: Network namespacing a filesystem isolation
-- **Šablony**: Předpřipravené Docker-like šablony
-- **Monitoring**: Real-time statistiky a metriky
+- **Minimalistic**: No unnecessary features - focus on performance
+- **Asyncio**: Fully asynchronous API for concurrent management of multiple VMs
+- **Isolation**: Network namespacing and filesystem isolation
+- **Templates**: Pre-configured Docker-like templates
+- **Monitoring**: Real-time statistics and metrics
 
-## 📋 Požadavky
+## 📋 Requirements
 
 ### Linux (Firecracker)
 - Linux kernel 4.14+
-- KVM modul
+- KVM module
 - Firecracker binary
-- curl (pro API komunikaci)
-- sudo práva (pro síťovou konfiguraci)
+- curl (for API communication)
+- sudo privileges (for network configuration)
 
 ```bash
-# Instalace Firecracker na Linux
+# Install Firecracker on Linux
 curl -s https://raw.githubusercontent.com/firecracker-microvm/firecracker/master/tools/devtool \
   | bash
 ```
 
 ### macOS (Apple VZ)
 - macOS 11.0+
-- Apple Silicon (M1/M2/M3 nebo novější)
+- Apple Silicon (M1/M2/M3 or newer)
 - Python 3.9+
 
-## 📦 Instalace
+## 📦 Installation
 
 ```bash
-# Klonování projektu
+# Clone the project
 git clone https://github.com/yourusername/novasandbox.git
 cd novasandbox
 
-# Instalace závislostí
+# Install dependencies
 pip install -r requirements.txt
 
-# (Volitelně) Instalace development závislostí
+# (Optional) Install development dependencies
 pip install -e .[dev]
 ```
 
-## 🎯 Rychlý start
+## 🎯 Quick Start
 
-### Základní příklad
+### Basic Example
 
 ```python
 import asyncio
@@ -56,104 +56,104 @@ from novasandbox.core import SandboxConfig
 from novasandbox.providers import FirecrackerHypervisor
 
 async def main():
-    # Inicialisace hypervisoru
+    # Initialize hypervisor
     hypervisor = FirecrackerHypervisor()
     
-    # Konfigurace sandboxu
+    # Configure sandbox
     config = SandboxConfig(
         template_id="alpine-python",
         memory_mb=512,
         vcpus=2
     )
     
-    # Vytvoření a spuštění sandboxu
+    # Create and start sandbox
     sandbox = await hypervisor.create_sandbox(config)
-    print(f"Sandbox {sandbox.sandbox_id} spuštěn za {sandbox.metadata['boot_time_ms']:.2f}ms")
+    print(f"Sandbox {sandbox.sandbox_id} started in {sandbox.metadata['boot_time_ms']:.2f}ms")
     
-    # Zastavení
+    # Stop
     await sandbox.stop()
 
 if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### Příklady
+### Examples
 
-Více příkladů najdete v [examples/](examples/):
-- [basic_usage.py](examples/basic_usage.py) - Základní operace
+Find more examples in [examples/](examples/):
+- [basic_usage.py](examples/basic_usage.py) - Basic operations
 
-## 📚 Struktura projektu
+## 📚 Project Structure
 
 ```
 novasandbox/
-├── core/                      # Jádro projektu
+├── core/                      # Project core
 │   ├── __init__.py
-│   ├── hypervisor.py         # Abstraktní vrstva hypervisoru
-│   ├── sandbox.py            # Třída Sandbox
-│   └── template_manager.py   # Správa šablon
+│   ├── hypervisor.py         # Abstract hypervisor layer
+│   ├── sandbox.py            # Sandbox class
+│   └── template_manager.py   # Template management
 │
-├── providers/                 # Implementace pro konkrétní hypervisory
+├── providers/                 # Implementations for specific hypervisors
 │   ├── __init__.py
 │   ├── firecracker.py        # Firecracker (Linux)
 │   └── apple_vz.py           # Apple VZ (macOS)
 │
-├── templates/                 # Předpřipravené šablony VM
+├── templates/                 # Pre-configured VM templates
 │   └── alpine-python.json
 │
-├── tests/                      # Testovací sada
+├── tests/                      # Test suite
 │   ├── test_sandbox.py
 │   └── benchmark.py
 │
-├── examples/                   # Příklady použití
+├── examples/                   # Usage examples
 │   └── basic_usage.py
 │
-├── requirements.txt           # Python závislosti
-└── README.md                  # Tato dokumentace
+├── requirements.txt           # Python dependencies
+└── README.md                  # This documentation
 ```
 
 ## 🔌 API Reference
 
 ### SandboxConfig
 
-Konfigurace pro vytvoření sandboxu:
+Configuration for creating a sandbox:
 
 ```python
 SandboxConfig(
-    template_id: str = "alpine-python",  # ID šablony
-    memory_mb: int = 512,                # Paměť v MB
-    vcpus: int = 2,                      # Počet vCPU
-    boot_timeout_ms: int = 5000,         # Timeout bootování
-    kernel_args: str = "...",            # Argumenty kernelu
-    enable_network: bool = True,         # Síťová připojení
-    host_port: int = None,               # Port na hostiteli
-    guest_port: int = 8080,              # Port v sandboxu
-    rootfs_path: str = None,             # Cesta k rootfs
-    extra_drives: List[Dict] = None,     # Extra disky
+    template_id: str = "alpine-python",  # Template ID
+    memory_mb: int = 512,                # Memory in MB
+    vcpus: int = 2,                      # Number of vCPUs
+    boot_timeout_ms: int = 5000,         # Boot timeout
+    kernel_args: str = "...",            # Kernel arguments
+    enable_network: bool = True,         # Network connections
+    host_port: int = None,               # Port on host
+    guest_port: int = 8080,              # Port in sandbox
+    rootfs_path: str = None,             # Path to rootfs
+    extra_drives: List[Dict] = None,     # Extra drives
     labels: Dict[str, str] = None        # Metadata labels
 )
 ```
 
-### Sandbox třída
+### Sandbox Class
 
 ```python
 class Sandbox:
-    # Atributy
-    sandbox_id: str                # Jedinečný identifikátor
-    state: SandboxState           # Aktuální stav
-    config: SandboxConfig         # Konfigurace
+    # Attributes
+    sandbox_id: str                # Unique identifier
+    state: SandboxState           # Current state
+    config: SandboxConfig         # Configuration
     
-    # Metody
-    async execute_command(cmd: str) -> str  # Vykoná příkaz
-    async get_stats() -> Dict                # Statistiky
-    async stop(force=False) -> bool         # Zastavení
-    async pause() -> bool                   # Pozastavení
-    async resume() -> bool                  # Obnovení
+    # Methods
+    async execute_command(cmd: str) -> str  # Execute command
+    async get_stats() -> Dict                # Statistics
+    async stop(force=False) -> bool         # Stop
+    async pause() -> bool                   # Pause
+    async resume() -> bool                  # Resume
     
-    is_running() -> bool                    # Je spuštěn?
-    get_uptime_ms() -> float               # Uptime v ms
+    is_running() -> bool                    # Is running?
+    get_uptime_ms() -> float               # Uptime in ms
 ```
 
-### Hypervisor rozhraní
+### Hypervisor Interface
 
 ```python
 class BaseHypervisor:
@@ -165,11 +165,11 @@ class BaseHypervisor:
     async get_sandbox_stats(sandbox_id: str) -> Dict
 ```
 
-## 🔧 Konfigurace
+## 🔧 Configuration
 
-### Firecracker specifické nastavení
+### Firecracker-Specific Settings
 
-V `core/hypervisor.py` se výchozí kernel argumenty:
+In `core/hypervisor.py`, the default kernel arguments:
 
 ```python
 kernel_args = (
@@ -179,14 +179,14 @@ kernel_args = (
 )
 ```
 
-Optimalizace pro co nejrychlejší start:
-- `pci=off` - Vypnutí PCI discovery
-- `nomodules` - Bez dynamického loadingu modulů
-- `noapic/noacpi` - Vypnutí APIC/ACPI pro snížení bootování
+Optimizations for fastest startup:
+- `pci=off` - Disable PCI discovery
+- `nomodules` - No dynamic module loading
+- `noapic/noacpi` - Disable APIC/ACPI to reduce boot time
 
-### Template struktura
+### Template Structure
 
-Šablony se nacházejí v `templates/`. Každá šablona potřebuje:
+Templates are located in `templates/`. Each template needs:
 
 ```
 templates/alpine-python/
@@ -195,7 +195,7 @@ templates/alpine-python/
 └── rootfs.ext4         # Root filesystem
 ```
 
-JSON konfigurace:
+JSON configuration:
 
 ```json
 {
@@ -212,78 +212,78 @@ JSON konfigurace:
 }
 ```
 
-## 🧪 Testování
+## 🧪 Testing
 
 ```bash
-# Spuštění unit testů
+# Run unit tests
 pytest tests/test_sandbox.py -v
 
-# Spuštění benchmark testů
+# Run benchmark tests
 pytest tests/benchmark.py -v --benchmark-only
 
-# Pokrytí kódu
+# Code coverage
 pytest tests/ --cov=core --cov=providers
 
-# Specifický test
+# Specific test
 pytest tests/test_sandbox.py::TestSandboxConfig::test_default_config -v
 ```
 
-## 📊 Výkonnostní benchmarky
+## 📊 Performance Benchmarks
 
-Očekávané hodnoty na Intel CPU s KVM (Firecracker):
+Expected values on Intel CPU with KVM (Firecracker):
 
-| Operace | Čas |
+| Operation | Time |
 |---------|------|
 | Sandbox boot | <150ms |
-| Config vytvoření | <1ms |
+| Config creation | <1ms |
 | Pause/Resume | <100ms |
 | Stats retrieval | <50ms |
 
-Očekávané hodnoty na Apple Silicon (VZ):
+Expected values on Apple Silicon (VZ):
 
-| Operace | Čas |
+| Operation | Time |
 |---------|------|
 | Sandbox boot | <200ms |
-| Config vytvoření | <1ms |
+| Config creation | <1ms |
 | Pause/Resume | <150ms |
 | Stats retrieval | <50ms |
 
-## 🛡️ Bezpečnost
+## 🛡️ Security
 
-- **Namespace isolation**: Každý sandbox je v separátním network namespacu
-- **Resource limits**: Memory a CPU limity jsou vynucovány
-- **Read-only rootfs**: Možnost spouštění read-only filesystému
-- **Network NAT**: Všechny sandboxes za NAT gateway
+- **Namespace isolation**: Each sandbox is in a separate network namespace
+- **Resource limits**: Memory and CPU limits are enforced
+- **Read-only rootfs**: Option to run read-only filesystem
+- **Network NAT**: All sandboxes behind NAT gateway
 
-⚠️ **Poznámka**: Pro produkci doporučujeme:
-- SELinux/AppArmor profily
+⚠️ **Note**: For production we recommend:
+- SELinux/AppArmor profiles
 - Signed kernel images
-- Mutual TLS pro API komunikaci
+- Mutual TLS for API communication
 
 ## 🐛 Troubleshooting
 
 ### Firecracker: "Permission denied"
 ```bash
-# Řešení: Spusťte s sudo nebo přidejte do kvm group
+# Solution: Run with sudo or add to kvm group
 sudo usermod -a -G kvm $USER
 ```
 
 ### "Template not found"
 ```bash
-# Vytvořte templates/ adresář se správnými soubory
+# Create templates/ directory with correct files
 mkdir -p templates/alpine-python
-# Zkopírujte vmlinux a rootfs.ext4
+# Copy vmlinux and rootfs.ext4
 ```
 
 ### macOS: "Virtualization.Framework not available"
 ```bash
-# Vyžaduje macOS 11+ s Apple Silicon
+# Requires macOS 11+ with Apple Silicon
 system_profiler SPHardwareDataType | grep "Chip"
 ```
 
-## 📝 Příklady
+## 📝 Examples
 
-### Souběžná správa více VM
+### Concurrent Management of Multiple VMs
 
 ```python
 import asyncio
@@ -293,7 +293,7 @@ from novasandbox.providers import FirecrackerHypervisor
 async def main():
     hypervisor = FirecrackerHypervisor()
     
-    # Vytvoření více konfigurací
+    # Create multiple configurations
     configs = [
         SandboxConfig(
             memory_mb=256,
@@ -302,20 +302,20 @@ async def main():
         for i in range(5)
     ]
     
-    # Spuštění všech souběžně
+    # Start all concurrently
     sandboxes = await asyncio.gather(
         *[hypervisor.create_sandbox(cfg) for cfg in configs]
     )
     
-    print(f"Spuštěno {len(sandboxes)} sandboxů")
+    print(f"Started {len(sandboxes)} sandboxes")
     
-    # Zastavení všech
+    # Stop all
     await asyncio.gather(
         *[sb.stop() for sb in sandboxes]
     )
 ```
 
-### Monitoring sandboxu
+### Sandbox Monitoring
 
 ```python
 async def monitor_sandbox(sandbox, interval=1.0):
@@ -326,29 +326,29 @@ async def monitor_sandbox(sandbox, interval=1.0):
         await asyncio.sleep(interval)
 ```
 
-## 🤝 Přispívání
+## 🤝 Contributing
 
-Vítáme pull requests! Prosím:
-1. Forknout projekt
-2. Vytvořit feature branch (`git checkout -b feature/amazing-feature`)
-3. Commitnout změny (`git commit -m 'Add amazing feature'`)
-4. Pushnout do branch (`git push origin feature/amazing-feature`)
-5. Otevřít Pull Request
+We welcome pull requests! Please:
+1. Fork the project
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 📄 Licence
+## 📄 License
 
-MIT License - viz [LICENSE](LICENSE) soubor
+MIT License - see [LICENSE](LICENSE) file
 
-## 👥 Autoři
+## 👥 Authors
 
-- Vytvořeno pro AI agenty a ultra-rychlé workloady
+- Created for AI agents and ultra-fast workloads
 
-## 🔗 Užitečné odkazy
+## 🔗 Useful Links
 
-- [Firecracker dokumentace](https://github.com/firecracker-microvm/firecracker)
+- [Firecracker documentation](https://github.com/firecracker-microvm/firecracker)
 - [Apple Virtualization.Framework](https://developer.apple.com/documentation/virtualization)
 - [Python asyncio](https://docs.python.org/3/library/asyncio.html)
 
 ---
 
-**Poslední aktualizace**: 16. ledna 2026
+**Last updated**: January 16, 2026

@@ -1,141 +1,141 @@
-✅ **NovaSandbox - Projekt úspěšně vytvořen!**
+✅ **NovaSandbox - Project Successfully Created!**
 
-## 📋 Co bylo vytvořeno
+## 📋 What Was Created
 
-Kompletní open-source projekt **NovaSandbox** - ultra-rychlý microVM systém pro AI agenty.
+Complete open-source project **NovaSandbox** - ultra-fast microVM system for AI agents.
 
-### 📁 Struktura projektu (26 souborů)
+### 📁 Project Structure (26 files)
 
 ```
 novaSandbox/
-├── 📂 core/              # Jádro projektu (4 soubory)
-│   ├── hypervisor.py     # Abstraktní vrstva hypervisoru
-│   ├── sandbox.py        # Třída Sandbox pro VM instanci
-│   ├── template_manager.py # Správa šablon
+├── 📂 core/              # Project core (4 files)
+│   ├── hypervisor.py     # Abstract hypervisor layer
+│   ├── sandbox.py        # Sandbox class for VM instance
+│   ├── template_manager.py # Template management
 │   └── __init__.py
 │
-├── 📂 providers/         # Implementace hypervisorů (3 soubory)
+├── 📂 providers/         # Hypervisor implementations (3 files)
 │   ├── firecracker.py    # Firecracker (Linux)
 │   ├── apple_vz.py       # Apple VZ (macOS)
 │   └── __init__.py
 │
-├── 📂 examples/          # Příklady použití (4 soubory)
-│   ├── basic_usage.py    # Základní operace
+├── 📂 examples/          # Usage examples (4 files)
+│   ├── basic_usage.py    # Basic operations
 │   ├── api_server.py     # REST API server (FastAPI)
-│   ├── firecracker_setup.py # Instrukce pro setup
+│   ├── firecracker_setup.py # Setup instructions
 │   └── __init__.py
 │
-├── 📂 tests/             # Testovací sada (3 soubory)
-│   ├── test_sandbox.py   # Unit testy
+├── 📂 tests/             # Test suite (3 files)
+│   ├── test_sandbox.py   # Unit tests
 │   ├── benchmark.py      # Performance benchmark
 │   └── __init__.py
 │
-├── 📂 templates/         # VM šablony (2 soubory)
-│   ├── alpine-python.json # Konfigurace šablony
+├── 📂 templates/         # VM templates (2 files)
+│   ├── alpine-python.json # Template configuration
 │   └── __init__.py
 │
-├── 📂 .github/workflows/ # CI/CD konfigurace
+├── 📂 .github/workflows/ # CI/CD configuration
 │   └── tests.yml         # GitHub Actions pipeline
 │
-└── 📋 Dokumentace & config (8 souborů)
-    ├── README.md         # Komplexní dokumentace
-    ├── CHANGELOG.md      # Historie změn & plány
-    ├── CONTRIBUTING.md   # Pokyny pro přispívání
-    ├── PROJECT_INDEX.md  # Index projektu
+└── 📋 Documentation & config (8 files)
+    ├── README.md         # Comprehensive documentation
+    ├── CHANGELOG.md      # Change history & plans
+    ├── CONTRIBUTING.md   # Contribution guidelines
+    ├── PROJECT_INDEX.md  # Project index
     ├── QUICK_START.py    # Quick reference guide
     ├── LICENSE           # MIT License
-    ├── requirements.txt  # Python závislosti
-    ├── pyproject.toml    # Build konfigurace
+    ├── requirements.txt  # Python dependencies
+    ├── pyproject.toml    # Build configuration
     ├── Makefile          # Development commands
     └── .gitignore        # Git ignore rules
 ```
 
-## 🎯 Klíčové komponenty
+## 🎯 Key Components
 
 ### Core Abstractions
-- ✅ **BaseHypervisor** - Abstraktní třída pro jednotné API
-- ✅ **SandboxConfig** - Konfigurační dataclass
-- ✅ **SandboxState** - Enum pro stavy VM
-- ✅ **Sandbox** - Reprezentace běžící VM instance
-- ✅ **TemplateManager** - Správa šablon
+- ✅ **BaseHypervisor** - Abstract class for unified API
+- ✅ **SandboxConfig** - Configuration dataclass
+- ✅ **SandboxState** - Enum for VM states
+- ✅ **Sandbox** - Running VM instance representation
+- ✅ **TemplateManager** - Template management
 
-### Implementace
+### Implementations
 - ✅ **FirecrackerHypervisor** - Linux/Firecracker (<150ms boot)
 - ✅ **AppleVZHypervisor** - macOS/Apple Virtualization.Framework
 
 ### Features
-- ✅ Asynchronní API (asyncio)
+- ✅ Asynchronous API (asyncio)
 - ✅ Cross-platform (Linux/macOS)
 - ✅ REST API server (FastAPI)
-- ✅ Unit testy & benchmarky
+- ✅ Unit tests & benchmarks
 - ✅ Type hints
-- ✅ Kompletní dokumentace
+- ✅ Complete documentation
 - ✅ GitHub Actions CI/CD
 
-## 📊 Statistiky
+## 📊 Statistics
 
-| Metrika | Hodnota |
+| Metric | Value |
 |---------|---------|
-| Python souborů | 17 |
-| Řádků kódu | ~1,750+ |
-| Modulů | 5 |
-| Tříd | 8+ |
-| Dokumentačních souborů | 5 |
-| Konfiguračních souborů | 5 |
-| **Celkem souborů** | **26** |
+| Python files | 17 |
+| Lines of code | ~1,750+ |
+| Modules | 5 |
+| Classes | 8+ |
+| Documentation files | 5 |
+| Configuration files | 5 |
+| **Total files** | **26** |
 
-## 🚀 Jak začít
+## 🚀 Getting Started
 
-### 1. Instalace
+### 1. Installation
 ```bash
 cd /Users/admin/novaSandbox
 pip install -r requirements.txt
 ```
 
-### 2. Spuštění příkladu
+### 2. Run Example
 ```bash
 python examples/basic_usage.py
 ```
 
-### 3. Spuštění API serveru
+### 3. Run API Server
 ```bash
 pip install fastapi uvicorn
 python examples/api_server.py
 ```
 
-### 4. Spuštění testů
+### 4. Run Tests
 ```bash
 pip install pytest pytest-asyncio
 pytest tests/ -v
 ```
 
-## 💻 Použité technologie
+## 💻 Technologies Used
 
-- **Python 3.9+** - Programovací jazyk
-- **asyncio** - Asynchronní runtime
+- **Python 3.9+** - Programming language
+- **asyncio** - Asynchronous runtime
 - **FastAPI** - REST API framework (optional)
 - **pytest** - Testing framework
-- **Firecracker** - Linux microVM (integrace)
-- **Apple VZ** - macOS hypervisor (integrace)
+- **Firecracker** - Linux microVM (integration)
+- **Apple VZ** - macOS hypervisor (integration)
 
-## 🎓 Klíčové koncepty
+## 🎓 Key Concepts
 
-### 1. **Abstrakce hypervisoru**
-Jednotné API pro různé hypervisory (Firecracker, Apple VZ, atd.)
+### 1. **Hypervisor Abstraction**
+Unified API for different hypervisors (Firecracker, Apple VZ, etc.)
 
-### 2. **Asynchronní design**
-Všechny operace podporují asyncio pro souběžné spravování více VM
+### 2. **Asynchronous Design**
+All operations support asyncio for concurrent management of multiple VMs
 
-### 3. **Template system**
-Předpřipravené šablony VM s konfigurací a validací
+### 3. **Template System**
+Pre-configured VM templates with configuration and validation
 
 ### 4. **Monitoring**
-Real-time statistiky a metriky běžících VM
+Real-time statistics and metrics for running VMs
 
 ### 5. **REST API**
-Plně funkční HTTP API pro správu VM
+Fully functional HTTP API for VM management
 
-## 📈 Performance targeting
+## 📈 Performance Targets
 
 **Linux (Firecracker)**
 - Boot time: < 150ms
@@ -147,61 +147,61 @@ Plně funkční HTTP API pro správu VM
 - Config creation: < 1ms
 - Memory overhead: < 100MB
 
-## 🛠️ Development commands
+## 🛠️ Development Commands
 
 ```bash
-# Instalace dev nástrojů
+# Install dev tools
 make install-dev
 
-# Spuštění testů
+# Run tests
 make test
 
-# Benchmark testy
+# Benchmark tests
 make test-bench
 
-# Formátování kódu
+# Code formatting
 make format
 
 # Linting
 make lint
 
-# Generování coverage reportu
+# Generate coverage report
 make coverage
 
-# Čištění
+# Clean
 make clean
 ```
 
-## 📚 Dokumentace
+## 📚 Documentation
 
-- **README.md** - Komplexní dokumentace s příklady
-- **CONTRIBUTING.md** - Pokyny pro přispívače
-- **CHANGELOG.md** - Historie a plánované funkcionality
-- **PROJECT_INDEX.md** - Detailní index projektu
+- **README.md** - Comprehensive documentation with examples
+- **CONTRIBUTING.md** - Contribution guidelines
+- **CHANGELOG.md** - History and planned features
+- **PROJECT_INDEX.md** - Detailed project index
 - **QUICK_START.py** - Quick reference guide
-- **Docstrings** - Ve všech třídách a funkcích
+- **Docstrings** - In all classes and functions
 
 ## 🔄 Git Ready
 
-Projekt je připraven pro:
+Project is ready for:
 - ✅ GitHub repository
 - ✅ GitHub Actions CI/CD
 - ✅ Pull requests & code review
 - ✅ Issue tracking
 - ✅ Semantic versioning
 
-## 📝 Příležitosti pro rozšíření
+## 📝 Extension Opportunities
 
-1. **Windows Hyper-V support** - Přidání Windows hypervisoru
-2. **REST API** - Úprava/rozšíření API endpointů
+1. **Windows Hyper-V support** - Add Windows hypervisor
+2. **REST API** - Modify/extend API endpoints
 3. **CLI tool** - Command-line interface
-4. **Container integration** - Docker/Podman podpora
+4. **Container integration** - Docker/Podman support
 5. **Metrics** - Prometheus/monitoring export
 6. **Web UI** - Web-based management panel
 
 ## 🎯 Next Steps
 
-1. **Vytvořit Git repository**
+1. **Create Git Repository**
    ```bash
    cd /Users/admin/novaSandbox
    git init
@@ -209,29 +209,29 @@ Projekt je připraven pro:
    git commit -m "Initial commit: NovaSandbox project"
    ```
 
-2. **Nahrát na GitHub**
+2. **Upload to GitHub**
    ```bash
    git remote add origin https://github.com/yourusername/novasandbox.git
    git push -u origin main
    ```
 
-3. **Nainstalovat Firecracker** (pro Linux testing)
+3. **Install Firecracker** (for Linux testing)
    ```bash
-   # Viz: examples/firecracker_setup.py
+   # See: examples/firecracker_setup.py
    ```
 
-4. **Spustit CI/CD pipeline**
-   - GitHub Actions se spustí automaticky
+4. **Run CI/CD Pipeline**
+   - GitHub Actions will run automatically
 
-## 📞 Podpora
+## 📞 Support
 
-- Viz **CONTRIBUTING.md** pro přispívání
-- Viz **README.md** pro detailní dokumentaci
-- Spusť `python QUICK_START.py` pro quick reference
+- See **CONTRIBUTING.md** for contributing
+- See **README.md** for detailed documentation
+- Run `python QUICK_START.py` for quick reference
 
 ---
 
-✨ **Projekt je připraven k vývoji a produkci!**
+✨ **Project is ready for development and production!**
 
-Vytvořeno: 16. ledna 2026
-Cesta: `/Users/admin/novaSandbox`
+Created: January 16, 2026
+Path: `/Users/admin/novaSandbox`

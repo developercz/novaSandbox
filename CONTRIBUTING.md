@@ -1,110 +1,110 @@
-# Přispívání do NovaSandbox
+# Contributing to NovaSandbox
 
-Děkujeme za zájem o přispívání do NovaSandbox! Tento dokument poskytuje pokyny pro přispívače.
+Thank you for your interest in contributing to NovaSandbox! This document provides guidelines for contributors.
 
-## Jak začít
+## Getting Started
 
-1. **Fork** projektu na GitHubu
-2. **Clone** vašeho fork:
+1. **Fork** the project on GitHub
+2. **Clone** your fork:
    ```bash
    git clone https://github.com/your-username/novasandbox.git
    cd novasandbox
    ```
 
-3. **Instalace dev prostředí**:
+3. **Install dev environment**:
    ```bash
    pip install -e .[dev]
    make install-dev
    ```
 
-4. **Vytvoření feature branch**:
+4. **Create a feature branch**:
    ```bash
    git checkout -b feature/amazing-feature
    ```
 
-## Vývoj
+## Development
 
 ### Code Style
 
-Projekt používá:
-- **Black** pro formatování (100 znaků na řádek)
-- **isort** pro řazení importů
-- **flake8** pro linting
-- **mypy** pro type checking
+The project uses:
+- **Black** for formatting (100 characters per line)
+- **isort** for import sorting
+- **flake8** for linting
+- **mypy** for type checking
 
-Spuštění všech nástrojů:
+Run all tools:
 ```bash
 make format lint
 ```
 
-### Testy
+### Tests
 
-Napište testy pro nové funkcionality:
+Write tests for new functionality:
 
 ```bash
-# Spuštění testů
+# Run tests
 make test
 
-# S coverage reportem
+# With coverage report
 make coverage
 
-# Benchmark testy
+# Benchmark tests
 make test-bench
 ```
 
-### Dokumentace
+### Documentation
 
-- Aktualizujte README.md pro nové funkce
-- Přidejte docstrings k funkcím a třídám
-- Aktualizujte CHANGELOG.md
+- Update README.md for new features
+- Add docstrings to functions and classes
+- Update CHANGELOG.md
 
-## Proces Pull Request
+## Pull Request Process
 
-1. **Příprava**:
+1. **Preparation**:
    ```bash
    # Ensure your code is formatted and linted
    make format lint test
    ```
 
-2. **Push** vašich změn:
+2. **Push** your changes:
    ```bash
    git push origin feature/amazing-feature
    ```
 
-3. **Vytvořte Pull Request** na GitHubu se:
-   - Jasným popisem změn
-   - Odkazem na související issues
-   - Potvrzením, že testy prošly
+3. **Create Pull Request** on GitHub with:
+   - Clear description of changes
+   - Link to related issues
+   - Confirmation that tests passed
 
-4. **Code review**: Čekejte na feedback od maintainerů
+4. **Code review**: Wait for feedback from maintainers
 
-## Pravidla pro PR
+## PR Rules
 
-- ✅ Testy musí projít
-- ✅ Kód musí být naformátovaný (Black/isort)
-- ✅ Bez linting chyb (flake8)
-- ✅ Type hints pro nové funkcionalitu
-- ✅ Dokumentace/docstrings
-- ✅ CHANGELOG.md aktualizován
+- ✅ Tests must pass
+- ✅ Code must be formatted (Black/isort)
+- ✅ No linting errors (flake8)
+- ✅ Type hints for new functionality
+- ✅ Documentation/docstrings
+- ✅ CHANGELOG.md updated
 
-## Reportování bugů
+## Reporting Bugs
 
-Vytvořte Issue s:
-1. Popisem problému
-2. Kroky k reprodukci
-3. Očekávaný vs. skutečný výsledek
-4. Informace o systému (OS, Python verze, atd.)
+Create an Issue with:
+1. Problem description
+2. Steps to reproduce
+3. Expected vs. actual result
+4. System information (OS, Python version, etc.)
 
-## Návrhy funkcionalit
+## Feature Proposals
 
-Otevřete Discussion nebo Issue s:
-1. Použitím a motivací
-2. Návrhem API
-3. Příklady kódu
+Open a Discussion or Issue with:
+1. Use case and motivation
+2. API proposal
+3. Code examples
 
-## Otázky?
+## Questions?
 
-- Otevřete Discussion na GitHubu
-- Kontaktujte maintainers
+- Open a Discussion on GitHub
+- Contact maintainers
 
-Děkujeme za přispívání! 🚀
+Thank you for contributing! 🚀

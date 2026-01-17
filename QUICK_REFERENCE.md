@@ -1,6 +1,6 @@
 # 🚀 NOVASANDBOX - QUICK REFERENCE
 
-## INSTALACE (1x)
+## INSTALLATION (one time)
 
 ```bash
 cd /Users/admin/novaSandbox
@@ -9,17 +9,17 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## NEJČASTĚJŠÍ PŘÍKAZY
+## MOST COMMON COMMANDS
 
-| Co chceš | Příkaz |
+| What you want | Command |
 |----------|--------|
-| **Demo (5 příkladů)** | `make starter` |
+| **Demo (5 examples)** | `make starter` |
 | **REST API** | `make run-api` |
 | **Performance test** | `make perf-test` |
 | **Security test** | `make security-test` |
 | **All help** | `make help` |
 
-## PYTHON KÓD - BASIC USAGE
+## PYTHON CODE - BASIC USAGE
 
 ```python
 import asyncio
@@ -28,7 +28,7 @@ from novasandbox.providers import AppleVZHypervisor
 
 async def main():
     config = SandboxConfig(security_level=SecurityLevel.STRICT)
-    hypervisor = AppleVZHypervisor()  # FirecrackerHypervisor na Linux
+    hypervisor = AppleVZHypervisor()  # FirecrackerHypervisor on Linux
     sandbox = await hypervisor.create_sandbox(config)
     
     result = await sandbox.execute_command("echo 'Hello'")
@@ -39,11 +39,11 @@ async def main():
 asyncio.run(main())
 ```
 
-## VOLBA BEZPEČNOSTI
+## SECURITY LEVEL CHOICE
 
-- **BASIC** → Jen test (bez ochrany)
-- **STANDARD** → ✅ Doporučeno
-- **STRICT** → Untrusted kód
+- **BASIC** → Testing only (no protection)
+- **STANDARD** → ✅ Recommended
+- **STRICT** → Untrusted code
 - **PARANOID** → Maximum
 
 ## REST API EXAMPLE
@@ -64,16 +64,16 @@ curl -X POST http://localhost:8000/sandboxes \
   }'
 ```
 
-## KLÍČOVÁ ČÍSLA
+## KEY NUMBERS
 
-| Metrika | Hodnota |
+| Metric | Value |
 |---------|---------|
-| Vytvoření | **0.058ms** |
-| vs Docker | **200-500ms** (3-8x pomalejší) |
+| Creation | **0.058ms** |
+| vs Docker | **200-500ms** (3-8x slower) |
 | Memory OV. | ~10MB/sandbox |
 | CPU OV. | ~2-3% |
 
-## PRODUKČNÍ DEPLOYMENT
+## PRODUCTION DEPLOYMENT
 
 **Linux:**
 ```bash
@@ -87,12 +87,12 @@ python3 examples/api_server.py
 
 ## TROUBLESHOOTING
 
-| Chyba | Řešení |
+| Error | Solution |
 |-------|--------|
-| ImportError AppleVZ | Normální na Linuxu, použij FirecrackerHypervisor |
-| Permission denied | Linux: sudo, nebo vypúštění Firecrackeru s sudo |
-| OOM: Kill process | Zvol vyšší memory_mb |
-| API nedostupný | Kontrola firewallu (localhost:8000) |
+| ImportError AppleVZ | Normal on Linux, use FirecrackerHypervisor |
+| Permission denied | Linux: sudo, or run Firecracker with sudo |
+| OOM: Kill process | Choose higher memory_mb |
+| API unavailable | Check firewall (localhost:8000) |
 
 ## MONITORING
 
