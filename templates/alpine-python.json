@@ -1,0 +1,28 @@
+{
+  "name": "Alpine Linux with Python",
+  "description": "Minimální Alpine Linux distribuce s Pythonem pro AI agenty",
+  "template_id": "alpine-python",
+  "os_type": "linux",
+  "memory_mb": 512,
+  "vcpus": 2,
+  "boot_time_ms": 150,
+  "disk_size_gb": 1.0,
+  "kernel_version": "6.1",
+  "required_files": [
+    "vmlinux",
+    "rootfs.ext4"
+  ],
+  "features": {
+    "network": true,
+    "serial_console": true,
+    "kvm": true
+  },
+  "packages": [
+    "python3",
+    "python3-pip",
+    "bash",
+    "curl",
+    "wget",
+    "vim"
+  ]
+}

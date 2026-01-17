@@ -1,0 +1,90 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "novasandbox"
+version = "0.1.0"
+description = "Ultra-fast microVM system for AI agents"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [
+    {name = "NovaSandbox Team", email = "contact@novasandbox.dev"}
+]
+keywords = ["microvm", "firecracker", "virtualization", "ai", "agents"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Monitoring",
+    "Topic :: System :: Shells",
+]
+
+dependencies = [
+    "psutil>=5.9.0",
+    "aiofiles>=23.2.0",
+    "httpx>=0.24.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-benchmark>=4.0.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "mypy>=1.0.0",
+]
+api = [
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/novasandbox"
+Documentation = "https://github.com/yourusername/novasandbox#readme"
+Repository = "https://github.com/yourusername/novasandbox"
+"Bug Tracker" = "https://github.com/yourusername/novasandbox/issues"
+
+[tool.setuptools]
+packages = ["core", "providers", "templates", "tests", "examples"]
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_mode = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+line_length = 100
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "-v --strict-markers"
+markers = [
+    "asyncio: marks tests as async (deselect with '-m \"not asyncio\"')",
+    "benchmark: marks tests as benchmarks",
+]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
