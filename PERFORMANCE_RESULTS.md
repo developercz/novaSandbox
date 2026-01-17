@@ -1,48 +1,48 @@
 # 📊 Performance Test Results - NovaSandbox
 
-**Testováno:** 16. ledna 2026  
-**Platforma:** macOS (Darwin) na Apple Silicon  
+**Tested:** January 16, 2026  
+**Platform:** macOS (Darwin) on Apple Silicon  
 **Python:** 3.14.0  
 
-## 🎯 Výsledky Stručně
+## 🎯 Results Summary
 
-| Metrika | Hodnota | Status |
+| Metric | Value | Status |
 |---------|---------|--------|
-| **Config creation** | 0.001ms | ✅ 1000x lepší než cíl |
-| **Sandbox creation** | 0.059ms | ✅ 85x lepší než cíl |
-| **Concurrent ops** | 0.176ms | ✅ 28x lepší než cíl |
-| **List templates** | 0.000ms | ✅ Nejrychlejší |
-| **Celkem operací** | 4600 | ✅ Všechny PASS |
-| **Avg čas/operaci** | 0.0441ms | ✅ Excelentní |
+| **Config creation** | 0.001ms | ✅ 1000x better than target |
+| **Sandbox creation** | 0.059ms | ✅ 85x better than target |
+| **Concurrent ops** | 0.176ms | ✅ 28x better than target |
+| **List templates** | 0.000ms | ✅ Fastest |
+| **Total operations** | 4600 | ✅ All PASS |
+| **Avg time/operation** | 0.0441ms | ✅ Excellent |
 
-## 📈 Detailní Výsledky
+## 📈 Detailed Results
 
-### Config Operace
+### Config Operations
 ```
-Config creation           0.001ms avg  (1000 iterací) ✅ PASS
-Config with drives        0.002ms avg  (500 iterací)  ✅ PASS
-TemplateManager creation  0.031ms avg  (100 iterací)  ✅ PASS
-List templates            0.000ms avg  (100 iterací)  ✅ PASS
-```
-
-### Sandbox Operace
-```
-Sandbox creation          0.059ms avg  (500 iterací)  ✅ PASS
-State check (is_running)  0.059ms avg  (1000 iterací) ✅ PASS
-Uptime calculation        0.057ms avg  (1000 iterací) ✅ PASS
-Create 10 sandboxes       0.068ms avg  (100 iterací)  ✅ PASS
+Config creation           0.001ms avg  (1000 iterations) ✅ PASS
+Config with drives        0.002ms avg  (500 iterations)  ✅ PASS
+TemplateManager creation  0.031ms avg  (100 iterations)  ✅ PASS
+List templates            0.000ms avg  (100 iterations)  ✅ PASS
 ```
 
-### Async Operace
+### Sandbox Operations
 ```
-Async operation (stub)    0.140ms avg  (200 iterací)  ✅ PASS
-Concurrent sandboxes 10x  0.176ms avg  (100 iterací)  ✅ PASS
+Sandbox creation          0.059ms avg  (500 iterations)  ✅ PASS
+State check (is_running)  0.059ms avg  (1000 iterations) ✅ PASS
+Uptime calculation        0.057ms avg  (1000 iterations) ✅ PASS
+Create 10 sandboxes       0.068ms avg  (100 iterations)  ✅ PASS
 ```
 
-## 🏆 Benchmarky Versus Cíle
+### Async Operations
+```
+Async operation (stub)    0.140ms avg  (200 iterations)  ✅ PASS
+Concurrent sandboxes 10x  0.176ms avg  (100 iterations)  ✅ PASS
+```
+
+## 🏆 Benchmarks Versus Targets
 
 ```
-Operace                  │ Cíl      │ Dosaženo │ Výsledek
+Operation                │ Target   │ Achieved │ Result
 ─────────────────────────┼──────────┼──────────┼─────────────
 Config creation          │ < 1.0ms  │ 0.001ms  │ ✅ 1000x
 Config with drives       │ < 1.0ms  │ 0.002ms  │ ✅ 500x

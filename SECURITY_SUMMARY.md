@@ -1,29 +1,29 @@
-# 🔒 BEZPEČNOSTNÍ SOUHRN
+# 🔒 SECURITY SUMMARY
 
-## Co jsme Implementovali
+## What We Implemented
 
-### 1. **Bezpečnostní Modul** (`core/security.py` - 380 řádků)
-- ✅ **4 úrovně bezpečnosti**: BASIC, STANDARD, STRICT, PARANOID
-- ✅ **SecurityPolicy**: Detailná kontrola všech aspektů
+### 1. **Security Module** (`core/security.py` - 380 lines)
+- ✅ **4 security levels**: BASIC, STANDARD, STRICT, PARANOID
+- ✅ **SecurityPolicy**: Detailed control of all aspects
 - ✅ **SandboxSecurityManager**: Per-sandbox management
-- ✅ **RateLimiter**: DOS ochrana
-- ✅ **HostSecurityHardening**: Kernel konfiguraci
+- ✅ **RateLimiter**: DOS protection
+- ✅ **HostSecurityHardening**: Kernel configuration
 
-### 2. **Integrace s Hypervisorem** (`core/hypervisor.py`)
-- ✅ **SandboxConfig.security_level**: Výběr úrovně
-- ✅ **SandboxConfig.get_security_policy()**: Dynamická politika
-- ✅ **DEFAULT_POLICIES**: Přednastavené konfigurace
+### 2. **Hypervisor Integration** (`core/hypervisor.py`)
+- ✅ **SandboxConfig.security_level**: Level selection
+- ✅ **SandboxConfig.get_security_policy()**: Dynamic policy
+- ✅ **DEFAULT_POLICIES**: Preset configurations
 
-### 3. **Chráněné Vektory Útoku**
+### 3. **Protected Attack Vectors**
 
 #### A. Host Breakout
 ```
-❌ Blokováno:
-  - /host/* přístup
+❌ Blocked:
+  - /host/* access
   - /../../../ directory traversal
   - Filesystem escape
   
-✅ Technologie:
+✅ Technology:
   - File access control
   - AppArmor (STANDARD+)
   - Seccomp (STANDARD+)
@@ -31,17 +31,17 @@
 
 #### B. Denial of Service
 ```
-❌ Blokováno:
-  - Fork bomb (fork/clone blokace)
+❌ Blocked:
+  - Fork bomb (fork/clone blocking)
   - Memory exhaustion (cgroups limit)
   - CPU starvation (cpuset limit)
   - File descriptor exhaustion
   - Network connection flood
   
-✅ Limity (STANDARD):
+✅ Limits (STANDARD):
   - Memory: 2GB
   - CPU: 4 cores
-  - Procesy: 1000
+  - Processes: 1000
   - Files: 1024
   - Net connections: 500
 ```

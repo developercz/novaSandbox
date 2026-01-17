@@ -1,11 +1,11 @@
 ═════════════════════════════════════════════════════════════════════════════════
                     NOVASANDBOX - PERFORMANCE TEST SUMMARY
-                            16. ledna 2026 - macOS
+                            January 16, 2026 - macOS
 ═════════════════════════════════════════════════════════════════════════════════
 
-✅ VŠECHNY TESTY PROŠLY ÚSPĚŠNĚ!
+✅ ALL TESTS PASSED SUCCESSFULLY!
 
-📊 VÝSLEDKY NA LOKÁLNÍM PC (Apple Silicon M1/M2)
+📊 RESULTS ON LOCAL PC (Apple Silicon M1/M2)
 ─────────────────────────────────────────────────────────────────────────────────
 
 Test Suite:                     performance_test.py

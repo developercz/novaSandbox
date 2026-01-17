@@ -1,32 +1,32 @@
-# 🚀 NASAZENÍ NOVASANDBOX - Praktický Průvodce
+# 🚀 NOVASANDBOX DEPLOYMENT - Practical Guide
 
-## Co je NovaSandbox?
+## What is NovaSandbox?
 
-Imagine máte program/kód, který nechcete spouštět přímo na svém počítači, protože:
-- Může to být **nebezpečné** (neznámý kód z internetu)
-- Chcete to **izolovat** od ostatních programů
-- Chcete **omezit** kolik RAM/CPU to může použít
-- Chcete být **jistí**, že se nikam nevymane
+Imagine you have a program/code that you don't want to run directly on your computer because:
+- It might be **dangerous** (unknown code from the internet)
+- You want to **isolate** it from other programs
+- You want to **limit** how much RAM/CPU it can use
+- You want to be **sure** it can't escape
 
-**NovaSandbox = Miniaturní virtuální počítač** který běží ultra-rychle (< 1ms) a bezpečně. Je jako Docker, ale **mnohem rychlejší**.
+**NovaSandbox = Miniature virtual computer** that runs ultra-fast (< 1ms) and securely. It's like Docker, but **much faster**.
 
 ---
 
-## 📋 Krok 1: Příprava (Co potřebuješ)
+## 📋 Step 1: Preparation (What You Need)
 
-### Na macOS (Apple Silicon - M1/M2/M3...)
+### On macOS (Apple Silicon - M1/M2/M3...)
 ```bash
-# Jen Python - nic jiného!
-python3 --version  # Mělo by být 3.9+
+# Just Python - nothing else!
+python3 --version  # Should be 3.9+
 ```
 
-### Na Linuxu (pro Firecracker)
+### On Linux (for Firecracker)
 ```bash
 # Python
 python3 --version
 
-# Firecracker (hyper-optimalizovaný hypervisor od AWS)
-sudo apt-get install -y firecracker  # nebo yum install
+# Firecracker (hyper-optimized hypervisor from AWS)
+sudo apt-get install -y firecracker  # or yum install
 
 # Network tools
 sudo apt-get install -y iproute2 dnsmasq
@@ -34,19 +34,19 @@ sudo apt-get install -y iproute2 dnsmasq
 
 ---
 
-## 🛠️ Krok 2: Build a Instalace
+## 🛠️ Step 2: Build and Installation
 
-### 2a. Stažení projektu
+### 2a. Download Project
 ```bash
-# Stáhnout projekt
+# Download project
 git clone https://github.com/yourusername/novasandbox.git
 cd novasandbox
 
-# Nebo měl bys už mít v /Users/admin/novaSandbox
+# Or you should already have it in /Users/admin/novaSandbox
 cd /Users/admin/novaSandbox
 ```
 
-### 2b. Instalace závislostí (Python balíčky)
+### 2b. Install Dependencies (Python Packages)
 ```bash
 # Vytvoříme virtuální prostředí (izolace Python balíčků)
 python3 -m venv venv

@@ -1,13 +1,13 @@
-# ✅ Bezpečnostní Checklist NovaSandbox
+# ✅ Security Checklist NovaSandbox
 
-## Implementované Bezpečnostní Kontroly
+## Implemented Security Controls
 
 ### Kernel Level (Linux/Firecracker)
-- ✅ **Seccomp**: Filtrování syscalls na úrovni kernelu
-- ✅ **Cgroups v2**: Resource control (RAM, CPU, procesy)
+- ✅ **Seccomp**: Syscall filtering at kernel level
+- ✅ **Cgroups v2**: Resource control (RAM, CPU, processes)
 - ✅ **AppArmor**: Mandatory Access Control
-- ✅ **Network Namespaces**: Izolace sítě per sandbox
-- ✅ **PID Namespaces**: Izolované process tree
+- ✅ **Network Namespaces**: Network isolation per sandbox
+- ✅ **PID Namespaces**: Isolated process tree
 
 ### Application Level (NovaSandbox)
 
